@@ -38,7 +38,7 @@ export default function App() {
   const [showAllAI, setShowAllAI] = useState(false);
   const [showAllConsigli, setShowAllConsigli] = useState(false);
 
-  // Funzione per aggiornare lo stato del gatto selezionato (sostituita per aggiornamento reale)
+  // Aggiorna lo stato del gatto selezionato
   const aggiornaGattoSelezionato = (key, value) => {
     setGatti(prev => {
       const nuovi = [...prev];
