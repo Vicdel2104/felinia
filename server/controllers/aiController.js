@@ -1,3 +1,14 @@
+import SintomoEntry from '../models/SintomoEntry.js';
+
+function determinaFlag(testo) {
+  const lower = testo.toLowerCase();
+  const gravi = ['sangue', 'non respira', 'convuls', 'grave', 'vomito persistente'];
+  const moderati = ['febbre', 'letarg', 'inappetenza', 'tosse'];
+  if (gravi.some(k => lower.includes(k))) return 'Grave';
+  if (moderati.some(k => lower.includes(k))) return 'Moderato';
+  return 'Lieve';
+}
+
 export async function analizzaSintomi(req, res) {
   const { nome, descrizione } = req.body;
   const files = req.files; // array file caricati
@@ -29,7 +40,19 @@ export async function analizzaSintomi(req, res) {
     });
 
     const risposta = completamento.choices[0].message.content;
-    res.json({ risultato: risposta });
+    const flag = determinaFlag(descrizione);
+
+    // Salva storico AI
+    const entry = new SintomoEntry({
+      nomeGatto: nome,
+      descrizione,
+      rispostaAI: risposta,
+      flag
+    });
+
+    await entry.save();
+
+    res.json({ risultato: risposta, flag });
   } catch (err) {
     console.error(err);
     res.status(500).json({ errore: 'Errore durante analisi AI' });

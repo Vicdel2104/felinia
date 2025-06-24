@@ -8,7 +8,20 @@ const vaccinoSchema = new mongoose.Schema({
 const gattoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   microchip: { type: String, default: '' },
+  razza: String,
+  sesso: String,
+  eta: Number,
+  colore: String,
+  dataIngresso: { type: Date, default: Date.now },
+  dataUscita: Date,
+  provenienza: String,
+  destinazione: String,
+  adozioneNote: String,
+  firmaAdottante: String,
+  documentiAllegati: [String],
   dataRegistrazione: { type: Date, default: Date.now },
+  interventi: [String],
+  esamiClinici: [String],
   vaccini: [vaccinoSchema],
   sintomiStorico: [
     {

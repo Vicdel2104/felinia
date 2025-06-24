@@ -6,6 +6,11 @@ const sintomoEntrySchema = new mongoose.Schema({
   data: { type: Date, default: Date.now },
   fileUrls: [String],  // lista URL o nomi file caricati (gestione file da implementare)
   rispostaAI: { type: String },  // testo analisi AI (flag, diagnosi, consigli)
+  flag: {
+    type: String,
+    enum: ['Grave', 'Moderato', 'Lieve'],
+    default: 'Lieve'
+  }
 }, { timestamps: true });
 
 const SintomoEntry = mongoose.model('SintomoEntry', sintomoEntrySchema);
