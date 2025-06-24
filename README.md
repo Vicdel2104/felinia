@@ -1,18 +1,20 @@
 # 🐾 FelinIA – Piattaforma Intelligente per la Medicina Felina
 
-FelinIA è una piattaforma healthtech focalizzata sulla salute dei gatti. Combina intelligenza artificiale e dati clinici per supportare pet owner e veterinari nella diagnosi precoce, prevenzione e gestione sanitaria dei felini.
+FelinIA è una piattaforma healthtech specializzata nella medicina felina, con due sezioni distinte:
+
+- **FelinIA Client** (`felinia-client`) – Interfaccia web per pet owner e enti veterinari (frontend React)
+- **FelinIA Server** (`felinia-server`) – Backend Node.js con AI integrata per analisi sintomi, diario e gestione clinica
 
 ---
 
-## 🗂️ Struttura del progetto
+## 🗂️ Struttura del Progetto 
+felinia/
+├── felinia-client/      # Frontend (React + Tailwind)
+├── felinia-server/      # Backend (Express + MongoDB + OpenAI)
+└── README.md
 
-- `frontend/` – Interfaccia React per pet owner e veterinari
-- `server/` – Backend Node.js con API REST e integrazione AI (OpenAI)
-- Database previsto: MongoDB (local o Atlas)
 
----
-
-## 🚀 Come avviare il progetto in locale
+## 🚀 Come Avviare il Progetto Localmente
 
 ### 1. Clona il repository
 
