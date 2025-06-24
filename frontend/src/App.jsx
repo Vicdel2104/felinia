@@ -159,36 +159,32 @@ export default function App() {
       });
       const data = await res.json();
       const risultato = data.risultato || "Nessuna risposta";
+      const flagServer = data.flag || "Lieve";
 
-      // Nuova logica flag/consigli aggiornata (patch)
-      let flag = "🔵 Da valutare";
-      let consigli = "Analisi automatica completata. Consulta il veterinario se i sintomi persistono.";
+      // Trasforma il flag in una stringa con emoji
+      const flagVisual =
+        flagServer === "Grave"
+          ? "🔴 Grave"
+          : flagServer === "Moderato"
+          ? "🟡 Moderato"
+          : "🟢 Lieve";
 
-      const graveKeywords = /(vomita(.*){0,10}frequentemente|10 volte|vomito con sangue|convulsioni|urina scura|non mangia|non beve|cammina storto|letargico|coma|respiro difficoltoso|muco rosso|occhi spenti)/i;
-      const moderatoKeywords = /(inappetenza|raffreddore|tosse|diarrea|occhi gonfi|zoppia|abbattuto|febbre|bozzi|noduli|starnuti)/i;
-
-      const testoSintomi = descrizioneAI.toLowerCase();
-      const testoDiagnosi = risultato.toLowerCase();
-
-      if (graveKeywords.test(testoSintomi) || testoDiagnosi.includes("grave") || testoDiagnosi.includes("emergenza")) {
-        flag = "🔴 Grave (emergenza, consultare subito un veterinario)";
-        consigli = "Rischio elevato: si consiglia una visita veterinaria urgente.";
-      } else if (moderatoKeywords.test(testoSintomi) || testoDiagnosi.includes("moderato")) {
-        flag = "🟡 Moderato (monitoraggio attento consigliato)";
-        consigli = "Sintomi da monitorare. Consulta il veterinario se persistono.";
-      } else {
-        flag = "🟢 Lieve (nessuna urgenza)";
-        consigli = "Monitoraggio domestico. Nessun rischio immediato apparente.";
-      }
+      // Semplice messaggio in base al flag ricevuto
+      const consigli =
+        flagServer === "Grave"
+          ? "Rischio elevato: si consiglia una visita veterinaria urgente."
+          : flagServer === "Moderato"
+          ? "Sintomi da monitorare. Consulta il veterinario se persistono."
+          : "Monitoraggio domestico. Nessun rischio immediato apparente.";
 
       setRispostaAI(risultato);
       const analisiDettagliata = {
         data: new Date().toLocaleDateString(),
         sintomi: descrizioneAI,
-        flag: flag,
-        probabilita: flag,
+        flag: flagVisual,
+        probabilita: flagVisual,
         diagnosi: risultato,
-        consigli: consigli
+        consigli
       };
       const nuovoStoricoAI = [...storicoAI, analisiDettagliata];
       setStoricoAI(nuovoStoricoAI);
