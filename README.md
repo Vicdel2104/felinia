@@ -20,10 +20,16 @@ FelinIA è una piattaforma healthtech dedicata alla salute dei gatti. Combina in
 git clone https://github.com/Vicdel2104/felinia.git
 cd felinia
 
-# Avvia il backend
-cd server && npm install && npm run dev
+# Installa le dipendenze nel backend
+cd server && npm install
+
+# In un altro terminale avvia il backend
+npm run dev
+
+# Per il frontend usa una nuova shell
+cd ../frontend && npm install
+npm run dev
 ```
 
-L'interfaccia frontend può essere avviata in modo analogo all'interno della cartella `frontend`.
 
 Per maggiori dettagli sulle funzionalità destinate agli enti consulta [docs/gestionale-spec.md](docs/gestionale-spec.md).
