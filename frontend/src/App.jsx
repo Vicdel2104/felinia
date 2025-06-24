@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { jsPDF } from "jspdf";
+import MenuLaterale from "./components/MenuLaterale";
+import SezioneEnti from "./components/SezioneEnti";
 
 export default function App() {
   const [gatti, setGatti] = useState([]);
   const [selectedGattoIndex, setSelectedGattoIndex] = useState(-1);
+  const [pagina, setPagina] = useState("gatti");
 
   const [nome, setNome] = useState("");
   const [microchip, setMicrochip] = useState("");
@@ -565,8 +568,12 @@ export default function App() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold text-center text-blue-700">FelinIA – Diario Salute Gatto</h1>
+    <div className="flex">
+      <MenuLaterale pagina={pagina} setPagina={setPagina} />
+      <main className="flex-1">
+        {pagina === "gatti" ? (
+          <div className="p-6 space-y-6 max-w-3xl mx-auto">
+            <h1 className="text-3xl font-bold text-center text-blue-700">FelinIA – Diario Salute Gatto</h1>
 
       <section className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">🐱 Seleziona Gatto</h2>
@@ -719,6 +726,11 @@ export default function App() {
       <div className="text-center">
         <button onClick={scaricaPDF} className="bg-green-600 text-white px-4 py-2 rounded">📄 Scarica PDF Completo</button>
       </div>
+          </div>
+        ) : (
+          <SezioneEnti />
+        )}
+      </main>
     </div>
   );
 }
