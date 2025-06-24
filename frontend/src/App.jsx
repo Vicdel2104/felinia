@@ -18,6 +18,11 @@ export default function App() {
   const [dataUscita, setDataUscita] = useState("");
   const [provenienza, setProvenienza] = useState("");
   const [destinazione, setDestinazione] = useState("");
+  const [interventi, setInterventi] = useState([]);
+  const [esami, setEsami] = useState([]);
+  const [testDiagnostici, setTestDiagnostici] = useState([]);
+  const [adozioneNote, setAdozioneNote] = useState("");
+  const [firmaAdottante, setFirmaAdottante] = useState("");
   const [vaccini, setVaccini] = useState([]);
   const [vaccinoNome, setVaccinoNome] = useState("");
   const [vaccinoData, setVaccinoData] = useState("");
@@ -60,6 +65,11 @@ export default function App() {
       setDataUscita("");
       setProvenienza("");
       setDestinazione("");
+      setInterventi([]);
+      setEsami([]);
+      setTestDiagnostici([]);
+      setAdozioneNote("");
+      setFirmaAdottante("");
       setVaccini([]);
       setDiario([]);
       setStoricoAI([]);
@@ -79,6 +89,11 @@ export default function App() {
       setDataUscita(gatto.dataUscita || "");
       setProvenienza(gatto.provenienza || "");
       setDestinazione(gatto.destinazione || "");
+      setInterventi(gatto.interventi ? [...gatto.interventi] : []);
+      setEsami(gatto.esami ? [...gatto.esami] : []);
+      setTestDiagnostici(gatto.testDiagnostici ? [...gatto.testDiagnostici] : []);
+      setAdozioneNote(gatto.adozioneNote || "");
+      setFirmaAdottante(gatto.firmaAdottante || "");
       setVaccini(gatto.vaccini ? [...gatto.vaccini] : []);
       setDiario(gatto.diario ? [...gatto.diario] : []);
       setStoricoAI(gatto.storicoAI ? [...gatto.storicoAI] : []);
